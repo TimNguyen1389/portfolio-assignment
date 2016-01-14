@@ -1,0 +1,20 @@
+img {
+  max-width: 100%;
+}
+
+a, a:link, a:active {
+  color: #BD4932;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #BD4932;
+}
+
+a:visited {
+  color: #105B63;
+}
+
+hr {
+  width: 60%;
+}
