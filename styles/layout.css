@@ -15,15 +15,15 @@
   margin: .2em 5%;
 }
 
- @media only screen and (min-width: 850px) {
+ @media only screen and (min-width: 920px) {
 
    .main-heading {
      float: none;
    }
 
    .filter select {
-     width: 15em;
-     margin: .2em .2em;
+     width: 12.5em;
+     margin: .2em 2.2em;
    }
 
    .main-heading {

@@ -1,9 +1,13 @@
+body {
+  font-family: "Open Sans";
+}
+
 img {
   max-width: 100%;
 }
 
 p {
-  font-size: 1.1em;
+  font-size: 1em;
 }
 
 a, a:link, a:active {

@@ -10,7 +10,13 @@ function Project (obj) {
 }
 
 Project.prototype.toHtml = function() {
-  var $newProject = $('div.template').clone();
+  var appTemplate = $('#project-template').html();
+  var compiledTemplate = Handlebars.compile(appTemplate);
+  this.daysAgo = parseInt((new Date() - new Date(this.developedOn))/60/60/24/1000);
+  this.developStatus = this.developedOn ? + this.daysAgo + ' days ago' : '(draft)';
+  var compiledHtml = compiledTemplate(this);
+  return compiledHtml;
+  /*var $newProject = $('div.template').clone();
   $newProject.attr('data-category', this.category);
   $newProject.find('a').attr({href: this.url, target: '_blank'});
   $newProject.find('img').attr({src: this.image});
@@ -19,7 +25,7 @@ Project.prototype.toHtml = function() {
   $newProject.find('time').html('about ' + parseInt((new Date() - new Date(this.developedOn))/60/60/24/1000) + ' days ago');
   $newProject.append('<hr>');
   $newProject.removeClass('template');
-  return $newProject;
+  return $newProject;*/
 };
 
 projectData.sort(function(a,b) {
