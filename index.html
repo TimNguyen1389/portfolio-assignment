@@ -2,44 +2,67 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Blog</title>
-    <link rel="stylesheet" href="css/vendor/normalize.css">
-    <link rel="stylesheet" href="css/portfolio.css">
+    <title>My Portfolio</title>
+
+    <link rel="stylesheet" href="styles/vendor/normalize.css">
+    <link rel="stylesheet" href="styles/icons.css">
+    <link rel="stylesheet" href="styles/base.css" >
+    <link rel="stylesheet" href="styles/layout.css">
   </head>
   <body>
+    <header>
+      <div class="img-container"></div>
+      <h1>
+        My Portfolio!
+      </h1>
+    </header>
+    <nav class="main-nav">
+      <ul>
+        <li class="tab icon-home" data-content="projects"><a href="#"> Home</a></li>
+        <li class="tab icon-happy" data-content="about"><a href="#"> About</a></li>
+        <li class="icon-twitter3"><a href="#"> Twitter</a></li>
+        <li class="icon-github"><a href="https://github.com/TimNguyen1389" target="_blank"> Github</a></li>
+      </ul>
+    </nav>
     <main>
-        <header>
-          <h1>
-            My Portfolio!
-          </h1>
-        </header>
-        <nav>
-          <ul>
-            <li><a href="#">HOME</a></li>
-            <li><a href="#">ABOUT</a></li>
-            <li><a href="#projects">PROJECTS</a></li>
-            <li><a href="https://github.com/TimNguyen1389" target="_blank">GITHUB</a></li>
-          </ul>
-        </nav>
-        <section id="projects">
-          <div class="template">
+        <section id="projects" class="tab-content">
+          <div class="filter">
+            <select id="category-filter">
+              <option value="">-- Filter by Categories --</option>
+            </select>
+          </div>
+          <div class="template project" data-category="dog">
             <div class="flex-container">
-              <div class="flex-item">
+              <div class="flex-item test">
                 <a><img /></a>
               </div>
               <div class="flex-item">
-                <header class="project">
-                  <h1><a class="title" >Title</a></h1>
+                <header>
+                  <h1><a class="project-title" >Title</a></h1>
                 </header>
-                <p class="proj-descript">
+                <section class="project-descript">
                   ipsum dolor amet do ex andouille minim
-                </p>
+                </section>
+                <a href="#" class="read-on">Read on &rarr;</a>
                 <p>
                   Created <time pubdate datetime="2000-01-01">Create Time</time>
                 </p>
               </div>
             </div>
           </div>
+        </section>
+        <section id="about" class="tab-content">
+          <header>
+            Welcome to my Portfolio
+          </header>
+          <section>
+            <h1>Some of my interests:</h1>
+            <ul>
+              <li>Spending time with my family</li>
+              <li>Fishing on a sunny day</li>
+              <li>Coding</li>
+            </ul>
+          </section>
         </section>
       </div>
     </main>
@@ -49,5 +72,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
     <script src="scripts/projects.js" charset="utf-8"></script>
     <script src="scripts/portfolio.js" charset="utf-8"></script>
+    <script src="scripts/projectView.js" charset="utf-8"></script>
   </body>
 </html>

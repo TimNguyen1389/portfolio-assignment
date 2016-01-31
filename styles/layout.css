@@ -1,0 +1,78 @@
+.main-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 2em;
+  background-color: #33332d;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  border-radius: 4px;
+  letter-spacing: 2px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.main-nav li {
+  display: inline;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: white;
+}
+.main-nav a {
+   color: white;
+}
+.main-nav a:hover, h1 a:hover, .main-nav a:focus, h1 a:focus {
+  color: #BD4932;
+}
+
+.img-container {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 26em;
+  background-image: url("../img/code.jpg");
+  background-size: cover;
+}
+
+div.template {
+  display: none;
+}
+
+.flex-container {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+}
+
+.flex-item {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6em 4em;
+  width: 65%;
+}
+
+@media screen and (max-width: 500px) {
+  .filter select {
+  width: 100%;
+  }
+}
+
+ @media only screen and (max-width: 1000px) {
+  .flex-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .flex-item {
+    padding: 2em 0;
+  }
+}
