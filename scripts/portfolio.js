@@ -1,5 +1,3 @@
-var projects = [];
-
 function Project (obj) {
   this.title = obj.title;
   this.category = obj.category;
@@ -9,6 +7,8 @@ function Project (obj) {
   this.body = obj.body;
 }
 
+Project.all = [];
+
 Project.prototype.toHtml = function() {
   var appTemplate = $('#project-template').html();
   var compiledTemplate = Handlebars.compile(appTemplate);
@@ -16,26 +16,48 @@ Project.prototype.toHtml = function() {
   this.developStatus = this.developedOn ? + this.daysAgo + ' days ago' : '(draft)';
   var compiledHtml = compiledTemplate(this);
   return compiledHtml;
-  /*var $newProject = $('div.template').clone();
-  $newProject.attr('data-category', this.category);
-  $newProject.find('a').attr({href: this.url, target: '_blank'});
-  $newProject.find('img').attr({src: this.image});
-  $newProject.find('a.project-title').html(this.title);
-  $newProject.find('section.project-descript').html(this.body);
-  $newProject.find('time').html('about ' + parseInt((new Date() - new Date(this.developedOn))/60/60/24/1000) + ' days ago');
-  $newProject.append('<hr>');
-  $newProject.removeClass('template');
-  return $newProject;*/
 };
 
-projectData.sort(function(a,b) {
-  return (new Date(b.developedOn)) - (new Date(a.developedOn));
-});
+Project.loadAll = function(projectData) {
+  projectData.sort(function(a,b) {
+    return (new Date(b.developedOn)) - (new Date(a.developedOn));
+  });
 
-projectData.forEach(function(ele) {
-  projects.push(new Project(ele));
-});
+  projectData.forEach(function(ele) {
+    Project.all.push(new Project(ele));
+  });
+};
 
-projects.forEach(function(p){
-  $('#projects').append(p.toHtml());
-});
+var eTagRemote = '';
+Project.getEtag = function() {
+  $.ajax({
+    type: 'HEAD',
+    url: 'data/projects.json',
+    success: function(data, message, xhr) {
+      eTagRemote = xhr.getResponseHeader('ETag');
+    }
+  }).done(Project.fetchAll);
+};
+
+Project.fetchAll = function() {
+  if (localStorage.projectData && (localStorage.eTagLocal === eTagRemote)) {
+    Project.loadAll(JSON.parse(localStorage.projectData));
+    projectView.initIndexPage();
+    console.log('data from local');
+  }
+  $.ajax({
+    beforeSend: function(xhr) {
+      if (xhr.overrideMimeType) {
+        xhr.overrideMimeType('application/json');
+      }
+    }
+  });
+
+  $.getJSON('data/projects.json')
+  .done(function(data, message, xhr) {
+    localStorage.setItem('projectData', JSON.stringify(data));
+    localStorage.setItem('eTagLocal', xhr.getResponseHeader('ETag'));
+    Project.loadAll(data);
+    projectView.initIndexPage();
+  });
+};

@@ -5,7 +5,7 @@ projectView.populateFilter = function() {
     if (!$(this).hasClass('template')) {
       val = $(this).attr('data-category');
       optionTag = '<option value="' + val + '">' + val + '</option>';
-      console.log(optionTag);
+      //console.log(optionTag);
       if ($('#category-filter option[value="' + val + '"]').length === 0) {
         $('#category-filter').append(optionTag);
       }
@@ -45,9 +45,15 @@ projectView.setTeaser = function() {
   });
 };
 
-$(function() {
-  projectView.populateFilter();
-  projectView.handleCategoryFilter();
-  projectView.handleMainNav();
-  projectView.setTeaser();
-});
+projectView.initIndexPage = function() {
+  Project.all.forEach(function(p){
+    $('#projects').append(p.toHtml());
+  });
+
+  $(function() {
+    projectView.populateFilter();
+    projectView.handleCategoryFilter();
+    projectView.handleMainNav();
+    projectView.setTeaser();
+  });
+};
